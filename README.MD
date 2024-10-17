@@ -1,7 +1,7 @@
 ## ⚡️ Installation
 
-- **npm**: `npm i shopee-tiktokshops-lazada-api`
-- **yarn**: `yarn add shopee-tiktokshops-lazada-api`
+- **npm**: `npm i e-com-api`
+- **yarn**: `yarn add e-com-api`
 
 ## TIKTOK MODULE (UPDATE API V2 VERSION 2309)
 
@@ -75,13 +75,6 @@
 
 ![alt](./src/assets/lazada.method.png)
 
-## Contact
-
-```
-Mail: phamkhanhminhman97@gmail.com
-Skype: phamkhanhminhman97@gmail.com
-```
-
 ## To be continued...# shopee-tiktok-lazada-api
 
-# shopee-tiktok-lazada-api
+# e-com-api
