@@ -4,6 +4,7 @@ import { createHmac } from 'crypto';
 
 export function concatDictionaryKeyValue(object) {
   return Object.keys(object).reduce(function (concatString, key) {
+    if (!object[key] || object[key] === '') return concatString;
     return concatString.concat(key + object[key]);
   }, '');
 }
@@ -17,6 +18,7 @@ export function createSignature(path, payload, appSecret) {
 export function parseToRequestParam(obj) {
   let str = '';
   for (const key in obj) {
+    if (!obj[key] || obj[key] === '') continue;
     if (str != '') {
       str += '&';
     }
@@ -80,6 +82,7 @@ export async function executeAuth(path: string, payload: any, appSecret: string)
   const params = parseToRequestParam(sortObject);
   const signature = createSignature(path, sortObject, appSecret);
 
+  console.log(params)
   try {
     const res = await axios.get(`https://auth.lazada.com/rest${path}?${params}&sign=${signature}`);
 
@@ -139,7 +142,7 @@ function createProductParametersXML2(payload) {
 }
 
 function getTimestampMilisec() {
-  return new Date().getTime();
+  return new Date().getTime().toString();
 }
 
 function getTimestampSec() {

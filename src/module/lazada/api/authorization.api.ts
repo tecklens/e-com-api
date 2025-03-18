@@ -11,13 +11,16 @@ import * as LazadaHelper from '../common/helper';
  * @param shopId
  * @returns
  */
-export function generateAuthLink(redirectURL: string, appKey: string, uuid: string) {
+export function generateAuthLink(redirectURL: string, appKey: string, state?: string) {
   const queryParams = new URLSearchParams({
     response_type: 'code',
     redirect_uri: redirectURL,
     client_id: appKey,
-    uuid,
   });
+
+  if (state) {
+    queryParams.set('state', state);
+  }
 
   const url = decodeURIComponent(`${LZD_END_POINT_AUTH}?${queryParams}`);
 
@@ -30,7 +33,7 @@ export function generateAuthLink(redirectURL: string, appKey: string, uuid: stri
  * @param config
  * @returns
  */
-export function fetchTokenWithAuthCode(authCode: string, uuid: string, config: LazadaConfig): Promise<LazadaResponseAccessToken> {
+export function fetchTokenWithAuthCode(authCode: string, config: LazadaConfig): Promise<LazadaResponseAccessToken> {
   const { appKey, appSecret } = config;
 
   const payload = {
@@ -38,7 +41,6 @@ export function fetchTokenWithAuthCode(authCode: string, uuid: string, config: L
     sign_method: LZD_ALGORITHM,
     timestamp: LazadaHelper.getTimestampMilisec(),
     code: authCode,
-    uuid,
   };
 
   return executeAuth(LAZADA_PATH.FETCH_TOKEN, payload, appSecret);
