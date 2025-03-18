@@ -63,8 +63,8 @@ export class LazadaModule {
     return await getCategoryTree(this.config);
   }
 
-  generateLazadaAuthLink(redirectURL: string, appKey: string, uuid: string) {
-    return generateAuthLink(redirectURL, appKey, uuid);
+  generateAuthLink(redirectURL: string, uuid: string) {
+    return generateAuthLink(redirectURL, this.config.appKey, uuid);
   }
 
   async fetchLazadaTokenWithAuthCode(authCode: string, uuid: string): Promise<LazadaResponseAccessToken> {
