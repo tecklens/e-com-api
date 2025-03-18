@@ -31,19 +31,19 @@ export class LazadaModule {
     return this.config;
   }
 
-  async getOrdersBeforeSomeDay() {
+  async getLazadaOrdersBeforeSomeDay() {
     return await getOrdersBeforeSomeDay(this.config);
   }
 
-  async getOrderDetail(orderNumber: string) {
+  async getLazadaOrderDetail(orderNumber: string) {
     return await getOrderById(this.config, orderNumber);
   }
 
-  async getProducts() {
+  async getLazadaProducts() {
     return await getProducts(this.config);
   }
 
-  async getProductItem(itemId: number) {
+  async getLazadaProductItem(itemId: number) {
     return await getProductItem(this.config, itemId);
   }
 
@@ -55,7 +55,7 @@ export class LazadaModule {
     return await updateStatusProduct(this.config, itemId, [payload]);
   }
 
-  async updatePrice(itemId: number, payload: any) {
+  async updatePriceLazada(itemId: number, payload: any) {
     return await updatePrice(this.config, itemId, [payload]);
   }
 
@@ -63,23 +63,23 @@ export class LazadaModule {
     return await getCategoryTree(this.config);
   }
 
-  generateAuthLink(redirectURL: string, appKey: string, uuid: string) {
+  generateLazadaAuthLink(redirectURL: string, appKey: string, uuid: string) {
     return generateAuthLink(redirectURL, appKey, uuid);
   }
 
-  async fetchTokenWithAuthCode(authCode: string, uuid: string): Promise<LazadaResponseAccessToken> {
+  async fetchLazadaTokenWithAuthCode(authCode: string, uuid: string): Promise<LazadaResponseAccessToken> {
     return fetchTokenWithAuthCode(authCode, uuid, this.config);
   }
 
-  async createProduct(payload) {
+  async createLazadaProduct(payload) {
     return createProduct(payload, this.config);
   }
 
-  async refreshToken() {
+  async refreshTokenLazada() {
     return refreshToken(this.config);
   }
 
-  async getBrands() {
+  async getLazadaBrands() {
     return getBrandByPages(this.config);
   }
 }
