@@ -85,6 +85,7 @@ enum PATH {
   FETCH_TOKEN = '/auth/token/create',
   REFRESH_TOKEN = '/auth/token/refresh',
   CREATE_PRODUCT = '/product/create',
+  GET_SELLER = '/seller/get',
 }
 
 enum CODE {

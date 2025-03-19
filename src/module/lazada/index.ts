@@ -5,7 +5,7 @@ import {
   getBrandByPages,
   getCategoryTree,
   getProductItem,
-  getProducts,
+  getProducts, getSeller,
   updatePrice,
   updateSellableQuantity,
   updateStatusProduct,
@@ -81,5 +81,8 @@ export class LazadaModule {
 
   async getLazadaBrands() {
     return getBrandByPages(this.config);
+  }
+  async getSeller() {
+    return getSeller(this.config);
   }
 }

@@ -76,7 +76,7 @@ export async function updateSellableQuantity(info, itemId, payload: Array<LZD_UP
  * @param payload
  * @returns
  */
-export async function updateStatusProduct(info, itemId: number, payload: Array<LZD_UPDATE_STATUS_PRODUCT>) {
+export async function updateStatusProduct(info: LazadaConfig, itemId: number, payload: Array<LZD_UPDATE_STATUS_PRODUCT>) {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
@@ -94,7 +94,7 @@ export async function updateStatusProduct(info, itemId: number, payload: Array<L
  * @param payload
  * @returns
  */
-export async function updatePrice(info, itemId: number, payload) {
+export async function updatePrice(info: LazadaConfig, itemId: number, payload) {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
@@ -105,7 +105,7 @@ export async function updatePrice(info, itemId: number, payload) {
   return executePOST(LAZADA_PATH.UPDATE_PRICE, obj, info.appSecret);
 }
 
-export async function getCategoryTree(info) {
+export async function getCategoryTree(info: LazadaConfig) {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
@@ -166,4 +166,14 @@ export async function getBrandByPages(info) {
     pageSize: 20,
   };
   return LazadaHelper.httpGet('/category/brands/query', obj, info.appSecret);
+}
+
+export async function getSeller(info: LazadaConfig) {
+  const obj = {
+    app_key: info.appKey,
+    sign_method: LZD_ALGORITHM,
+    access_token: info.appAccessToken,
+    timestamp: LazadaHelper.getTimestampMilisec(),
+  };
+  return LazadaHelper.httpGet(LAZADA_PATH.GET_SELLER, obj, info.appSecret);
 }
