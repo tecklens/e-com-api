@@ -29,7 +29,7 @@ interface ShopList {
 type RefreshToken = AccessToken;
 
 type ResponseAccessToken = ResponseCommon<AccessToken>;
-type ResponseAuthorizedShop = ResponseCommon<ShopList>;
+type ResponseAuthorizedShop = ResponseCommon<{shops: ShopList[]}>;
 type ResponseRefreshToken = ResponseCommon<RefreshToken>;
 
 export {
