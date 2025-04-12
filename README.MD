@@ -1,3 +1,4 @@
+https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-api
 ## ⚡️ Installation
 
 - **npm**: `npm i e-com-api`

@@ -14,7 +14,7 @@ export async function getOrderDetail(orderNumber: string, config: TiktokConfig):
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${TiktokHelper.commonParameter2(config, timestamp)}&ids=${orderNumber}`;
 
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.ORDER_DETAIL, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.ORDER_DETAIL, commonParam, config);
 
   return TiktokHelper.httpGet(url, config);
 }
@@ -32,7 +32,7 @@ export async function getOrderList(before, config: TiktokConfig): Promise<any> {
     order_status: 'DELIVERED',
   };
 
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.ORDER_LIST, commonParam, config, body);
+  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.ORDER_LIST, commonParam, config, body);
 
   const headers = TiktokHelper.getHeaders(config);
 
@@ -55,7 +55,7 @@ export async function shipPackage(packageId: string, payload: TiktokRequestShipP
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
   const pathTimeSlot = TiktokHelper.replacePlaceholder(TIKTOK_PATH_202309.SHIP_PACKAGE, TIKTOK_PATH_PLACEHOLDER.PACKAGE, packageId);
 
-  const url = TiktokHelper.genURLwithSignature(pathTimeSlot, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(pathTimeSlot, commonParam, config);
 
   const body: TiktokRequestShipPackage = {
     handover_method: payload.handover_method,

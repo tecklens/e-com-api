@@ -19,11 +19,11 @@ interface AccessToken {
 
 interface ShopList {
   region: string;
-  shop_cipher: string;
-  shop_code: string;
-  shop_id: string;
-  shop_name: string;
-  type: number;
+  cipher: string;
+  code: string;
+  id: string;
+  name: string;
+  seller_type: string;
 }
 
 type RefreshToken = AccessToken;

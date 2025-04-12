@@ -20,7 +20,7 @@ import {
 export async function getCategories(config: TiktokConfig): Promise<TiktokResponseCategories> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${TiktokHelper.commonParameter2(config, timestamp)}`;
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.CATEGORIES, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.CATEGORIES, commonParam, config);
 
   return TiktokHelper.httpGet(url, config);
 }
@@ -42,7 +42,7 @@ export async function getCategoryRules(categoryId: string, config: TiktokConfig)
     TIKTOK_PATH_PLACEHOLDER.CATEGORY,
     categoryId,
   );
-  const url = TiktokHelper.genURLwithSignature(pathGetCategoryRule, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(pathGetCategoryRule, commonParam, config);
 
   return TiktokHelper.httpGet(url, config);
 }
@@ -59,7 +59,7 @@ export async function getBrands(categoryId: string, config: TiktokConfig): Promi
   }
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${TiktokHelper.commonParameter2(config, timestamp)}&category_id=${categoryId}&page_size=100`;
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.BRANDS, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.BRANDS, commonParam, config);
   return TiktokHelper.httpGet(url, config);
 }
 
@@ -74,7 +74,7 @@ export async function getAttributes(categoryId: string, config: TiktokConfig): P
   const commonParam = `${TiktokHelper.commonParameter2(config, timestamp)}`;
 
   const pathGetAttributes = TiktokHelper.replacePlaceholder(TIKTOK_PATH_202309.ATTRIBUTES, TIKTOK_PATH_PLACEHOLDER.CATEGORY, categoryId);
-  const url = TiktokHelper.genURLwithSignature(pathGetAttributes, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(pathGetAttributes, commonParam, config);
 
   return TiktokHelper.httpGet(url, config);
 }
@@ -83,7 +83,7 @@ export async function uploadProductImage(imagePath: string, config: TiktokConfig
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${TiktokHelper.commonParameter2(config, timestamp)}`;
 
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.PRODUCT_IMAGE, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.PRODUCT_IMAGE, commonParam, config);
 
   const formData = new FormData();
   formData.append('data', imagePath);
@@ -106,7 +106,7 @@ export async function activeProduct(productIds: string[], config: TiktokConfig):
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
 
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.ACTIVE_PRODUCT, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.ACTIVE_PRODUCT, commonParam, config);
 
   const body: TiktokRequestActiveProduct = {
     product_ids: productIds,
@@ -131,7 +131,7 @@ export async function deactiveProduct(productIds: string[], config: TiktokConfig
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
 
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.DEACTIVE_PRODUCT, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.DEACTIVE_PRODUCT, commonParam, config);
 
   const body: TiktokRequestDeactiveProduct = {
     product_ids: productIds,
@@ -151,7 +151,7 @@ export async function deactiveProduct(productIds: string[], config: TiktokConfig
 export async function getProductDetail(productId: string, config: TiktokConfig): Promise<any> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${TiktokHelper.commonParameter2(config, timestamp)}&product_id=${productId}`;
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.PRODUCT_DETAIL, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.PRODUCT_DETAIL, commonParam, config);
 
   return TiktokHelper.httpGet(url, config);
 }
@@ -166,7 +166,7 @@ export async function createProduct(payload: TiktokRequestCreateProduct, config:
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
   const body = payload;
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.CREATE_PRODUCT, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.CREATE_PRODUCT, commonParam, config);
 
   const headers = TiktokHelper.getHeaders(config);
   return TiktokHelper.httpPost(url, body, headers);

@@ -11,7 +11,7 @@ import { TiktokResponseAccessToken, TiktokResponseAuthorized, TiktokResponseRefr
 async function requestTiktokAPI(config: TiktokConfig, path: string): Promise<any> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter(config, timestamp);
-  const url = TiktokHelper.genURLwithSignature(path, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(path, commonParam, config);
   return TiktokHelper.httpGet(url, config);
 }
 

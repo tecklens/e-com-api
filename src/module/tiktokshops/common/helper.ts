@@ -1,7 +1,7 @@
 import * as crypto from 'crypto-js';
-import { TIKTOK_END_POINT } from './constant';
-import { TiktokConfig } from '../dto/request/config.request';
-import axios, { AxiosResponse } from 'axios';
+import {TIKTOK_END_POINT} from './constant';
+import {TiktokConfig} from '../dto/request/config.request';
+import axios, {AxiosResponse} from 'axios';
 
 export function commonParameter(config, timestamp) {
   const { appKey } = config;
@@ -22,6 +22,7 @@ function objKeySort(obj) {
   const newKey = Object.keys(obj).sort();
   const newObj = {};
   for (let i = 0; i < newKey.length; i++) {
+    console.log(newKey);
     newObj[newKey[i]] = obj[newKey[i]];
   }
   return newObj;
@@ -39,11 +40,10 @@ function signRequest(params: Record<string, string>, path: string, config: Recor
   }
   signstring = signstring + (!body ? appSecret : JSON.stringify(body) + appSecret);
 
-  const signature = crypto.HmacSHA256(signstring, appSecret).toString();
-  return signature;
+  return crypto.HmacSHA256(signstring, appSecret).toString();
 }
 
-function parseParmsURL(url) {
+function parseParamsURL(url) {
   const params = {};
   url.searchParams.forEach((value, key) => {
     params[key] = value;
@@ -51,10 +51,11 @@ function parseParmsURL(url) {
   return params;
 }
 
-function genURLwithSignature(path, commonParam, config, body?) {
+function genURLWithSignature(path, commonParam, config, body?) {
   const url = new URL(TIKTOK_END_POINT + path + commonParam);
-  const params = parseParmsURL(url);
+  const params = parseParamsURL(url);
   const signature2 = signRequest(params, path, config, body);
+  console.log(signature2, 'signature2')
   url.searchParams.set('sign', signature2);
   return url.toString();
 }
@@ -136,8 +137,8 @@ export {
   commonParameter2,
   objKeySort,
   signRequest,
-  parseParmsURL,
-  genURLwithSignature,
+  parseParamsURL,
+  genURLWithSignature,
   getTimestampHoursAgo,
   replacePlaceholder,
   isAccessTokenValid,

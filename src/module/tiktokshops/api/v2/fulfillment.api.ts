@@ -15,7 +15,7 @@ export async function getPackageTimeSlots(packageId: string, config: TiktokConfi
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
   const pathTimeSlot = TiktokHelper.replacePackageId(TIKTOK_PATH_202309.PACKAGE_TIME_SLOT, packageId);
 
-  const url = TiktokHelper.genURLwithSignature(pathTimeSlot, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(pathTimeSlot, commonParam, config);
 
   return TiktokHelper.httpGet(url, config);
 }
@@ -36,7 +36,7 @@ export async function shipPackage(packageId: string, payload: TiktokRequestShipP
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
   const pathTimeSlot = TiktokHelper.replacePackageId(TIKTOK_PATH_202309.SHIP_PACKAGE, packageId);
 
-  const url = TiktokHelper.genURLwithSignature(pathTimeSlot, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(pathTimeSlot, commonParam, config);
 
   const body: TiktokRequestShipPackage = {
     handover_method: payload.handover_method,
@@ -61,7 +61,7 @@ export async function getPackageShippingDocument(packageId: string, documentType
 
   const pathShippingDocument = TiktokHelper.replacePackageId(TIKTOK_PATH_202309.PACKAGE_SHIPPING_DOCUMENT, packageId);
 
-  const url = TiktokHelper.genURLwithSignature(pathShippingDocument, commonParam, config);
+  const url = TiktokHelper.genURLWithSignature(pathShippingDocument, commonParam, config);
 
   return TiktokHelper.httpGet(url, config);
 }
