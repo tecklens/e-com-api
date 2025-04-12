@@ -151,7 +151,6 @@ export async function createProduct(payload, config: LazadaConfig) {
     timestamp: LazadaHelper.getTimestampMilisec(),
     access_token: config.appAccessToken,
   };
-  console.log(obj);
 
   return executePOST(LAZADA_PATH.CREATE_PRODUCT, obj, config.appSecret);
 }

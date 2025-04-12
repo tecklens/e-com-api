@@ -1,5 +1,5 @@
 import { TiktokConfig } from '../../dto/request/config.request';
-import { TIKTOK_END_POINT_AUTH, TIKTOK_PATH_202309 } from '../../common/constant';
+import {TIKTOK_END_POINT_AUTH, TIKTOK_PATH_202309, TIKTOK_PATH_202502} from '../../common/constant';
 import * as TiktokHelper from '../../common/helper';
 import { TiktokResponseAccessToken, TiktokResponseAuthorized, TiktokResponseRefreshToken } from '../../dto/response/config.response';
 
@@ -28,7 +28,18 @@ export function getAuthorizedShop(config: TiktokConfig): Promise<TiktokResponseA
  * @returns {Promise<TiktokResponseRefreshToken>} - Response of refreshing token.
  */
 export function refreshToken(config: TiktokConfig): Promise<TiktokResponseRefreshToken> {
-  return requestTiktokAPI(config, TIKTOK_PATH_202309.REFRESH_TOKEN);
+  const { appKey, appSecret } = config;
+  const grantType = 'refresh_token';
+  if (!config.refreshToken) throw new Error('Refresh token not found')
+  const queryParams = new URLSearchParams({
+    app_key: appKey,
+    app_secret: appSecret,
+    grant_type: grantType,
+    refresh_token: config.refreshToken,
+  });
+  const url = `${TIKTOK_END_POINT_AUTH}${TIKTOK_PATH_202309.REFRESH_TOKEN}?${queryParams}`;
+
+  return TiktokHelper.httpGet(url, config);
 }
 
 /**

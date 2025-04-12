@@ -60,6 +60,67 @@ interface Attributes {
   attributes: Array<any>;
 }
 
+interface ProductSearchData {
+  total_count: number;
+  products: TikTokProduct[];
+  next_page_token?: string;
+}
+
+interface TikTokProduct {
+  id: string;
+  title: string;
+  status: string;
+  skus: TikTokSku[];
+  sales_regions: string[];
+  create_time: number;
+  update_time: number;
+  product_sync_fail_reasons?: string[];
+  is_not_for_sale: boolean;
+  recommended_categories?: RecommendedCategory[];
+  listing_quality_tier?: string;
+  integrated_platform_statuses?: IntegratedPlatformStatus[];
+  audit?: {
+    status: string;
+  };
+}
+
+interface TikTokSku {
+  id: string;
+  seller_sku: string;
+  price: {
+    currency: string;
+    tax_exclusive_price: string;
+    sale_price: string;
+  };
+  inventory: TikTokInventory[];
+  list_price: {
+    amount: string;
+    currency: string;
+  };
+  external_list_prices?: ExternalListPrice[];
+}
+
+interface TikTokInventory {
+  warehouse_id: string;
+  quantity: number;
+}
+
+interface ExternalListPrice {
+  source: string;
+  amount: string;
+  currency: string;
+}
+
+interface RecommendedCategory {
+  id: string;
+  local_name: string;
+}
+
+interface IntegratedPlatformStatus {
+  platform: string;
+  status: string;
+}
+
 type ResponseUpdateStock = TiktokResponseCommon<UpdateStock>;
 type ResponseDeactiveProduct = TiktokResponseCommon<DeactiveProduct>;
 type ResponseActiveProduct = TiktokResponseCommon<ActiveProduct>;
@@ -68,6 +129,7 @@ type ResponseCategoryRules = TiktokResponseCommon<CategoryRules>;
 type ResponseBrands = TiktokResponseCommon<Brands>;
 type ResponseAttributes = TiktokResponseCommon<Attributes>;
 type ResponseUploadImage = TiktokResponseCommon<UploadImage>;
+type ResponseProductSearchData = TiktokResponseCommon<ProductSearchData>;
 
 export {
   ResponseUpdateStock as TiktokResponseUpdateStock,
@@ -78,4 +140,5 @@ export {
   ResponseBrands as TiktokResponseBrands,
   ResponseAttributes as TiktokResponseAttributes,
   ResponseUploadImage as TiktokResponseUploadImage,
+  ResponseProductSearchData as TiktokResponseProductSearchData,
 };

@@ -2,7 +2,7 @@ export * from './api/v2/authorization.api'
 import { getOrderDetail, getOrderList } from './api/v2/order.api';
 import { TiktokConfig } from './dto/request/config.request';
 import { fetchTokenWithTiktokAuthCode, getAuthorizedShop, refreshToken } from './api/v2/authorization.api';
-import { createProduct, getAttributes, getBrands, getCategories, getProductDetail } from './api/v2/product.api';
+import { createProduct, getAttributes, getBrands, getCategories, getListProduct, getProductDetail } from './api/v2/product.api';
 import { getPackageShippingDocument, getPackageTimeSlots, shipPackage } from './api/v2/fulfillment.api';
 import { TiktokRequestShipPackage } from './dto/request/fulfillment.request';
 import { TIKTOK_DOCUMENT_TYPE } from './common/constant';
@@ -39,6 +39,10 @@ export class TiktokModule {
 
   async getProductDetail(productId: string): Promise<any> {
     return await getProductDetail(productId, this.config);
+  }
+
+  async getListProduct({params}: {params: {page_size: number;page_token?: string}}): Promise<any> {
+    return await getListProduct(params, this.config);
   }
 
   async getAuthorizedShop(): Promise<TiktokResponseAuthorized> {

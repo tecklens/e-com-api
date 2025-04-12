@@ -1,4 +1,4 @@
-import { TIKTOK_PATH_202309, TIKTOK_PATH_PLACEHOLDER } from '../../common/constant';
+import {TIKTOK_PATH_202309, TIKTOK_PATH_202502, TIKTOK_PATH_PLACEHOLDER} from '../../common/constant';
 import * as TiktokHelper from '../../common/helper';
 import { TiktokConfig } from '../../dto/request/config.request';
 import { TiktokRequestActiveProduct, TiktokRequestCreateProduct, TiktokRequestDeactiveProduct } from '../../dto/request/product.request';
@@ -8,9 +8,10 @@ import {
   TiktokResponseBrands,
   TiktokResponseCategories,
   TiktokResponseCategoryRules,
-  TiktokResponseDeactiveProduct,
+  TiktokResponseDeactiveProduct, TiktokResponseProductSearchData,
   TiktokResponseUploadImage,
 } from '../../dto/response/product.response';
+import {commonParameter3} from "../../common/helper";
 
 /**
  * Fetches the list of categories.
@@ -154,6 +155,20 @@ export async function getProductDetail(productId: string, config: TiktokConfig):
   const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.PRODUCT_DETAIL, commonParam, config);
 
   return TiktokHelper.httpGet(url, config);
+}
+
+/**
+ *
+ * @param config - Tiktok API configuration.
+ * @returns {Promise<any>}
+ */
+export async function getListProduct(params: {page_size: number;page_token?: string}, config: TiktokConfig): Promise<TiktokResponseProductSearchData> {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const commonParam = TiktokHelper.commonParameter3(config, {page_size: params.page_size, page_token: params.page_token}, timestamp);
+  const url = TiktokHelper.genURLWithSignatureV2(TIKTOK_PATH_202309.PRODUCT_LIST, commonParam, config);
+
+  const headers = TiktokHelper.getHeaders(config);
+  return TiktokHelper.httpPost(url, {}, headers);
 }
 
 /**
