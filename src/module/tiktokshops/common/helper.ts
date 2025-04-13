@@ -1,4 +1,4 @@
-import * as crypto from 'crypto-js';
+import crypto from "crypto";
 import {TIKTOK_END_POINT} from './constant';
 import {TiktokConfig} from '../dto/request/config.request';
 import axios, {AxiosResponse} from 'axios';
@@ -70,7 +70,9 @@ function signRequest(params: Record<string, string>, path: string, config: Recor
     }
     signstring = signstring + (!body ? appSecret : JSON.stringify(body) + appSecret);
 
-    return crypto.HmacSHA256(signstring, appSecret).toString();
+    const hmac = crypto.createHmac("sha256", appSecret);
+    hmac.update(signstring, 'utf-8');
+    return hmac.digest("hex");
 }
 
 function parseParamsURL(url) {
@@ -91,10 +93,10 @@ function genURLWithSignature(path, commonParam, config, body?) {
 
 function genURLWithSignatureV2(path, commonParam2: {sortedParams: string,paramString: string }, config, body?) {
     const url = new URL(TIKTOK_END_POINT + path + '?' + commonParam2.sortedParams);
-    console.log(url.toString());
     const params = parseParamsURL(url);
     const signature2 = signRequest(params, path, config, body);
     url.searchParams.set('sign', signature2);
+    console.log(url.toString());
     return url.toString();
 }
 
@@ -118,7 +120,7 @@ function handleError(err: any) {
 
 function getHeaders(config: TiktokConfig, contentType = 'application/json') {
     return {
-        'Content-Type': contentType,
+        'content-type': contentType,
         'x-tts-access-token': config.accessToken,
     };
 }

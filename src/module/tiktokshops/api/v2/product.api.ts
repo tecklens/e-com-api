@@ -164,11 +164,12 @@ export async function getProductDetail(productId: string, config: TiktokConfig):
  */
 export async function getListProduct(params: {page_size: number;page_token?: string}, config: TiktokConfig): Promise<TiktokResponseProductSearchData> {
   const timestamp = Math.floor(Date.now() / 1000);
-  const commonParam = TiktokHelper.commonParameter3(config, {page_size: params.page_size, page_token: params.page_token}, timestamp);
-  const url = TiktokHelper.genURLWithSignatureV2(TIKTOK_PATH_202309.PRODUCT_LIST, commonParam, config);
+  const commonParam = TiktokHelper.commonParameter3(config, {page_size: params.page_size, page_token: params.page_token, category_version: 'v1'}, timestamp);
+  const body = {status: 'ALL'}
+  const url = TiktokHelper.genURLWithSignatureV2(TIKTOK_PATH_202309.PRODUCT_LIST, commonParam, config, body);
 
   const headers = TiktokHelper.getHeaders(config);
-  return TiktokHelper.httpPost(url, {}, headers);
+  return TiktokHelper.httpPost(url, body, headers);
 }
 
 /**
