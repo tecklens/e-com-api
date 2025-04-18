@@ -24,15 +24,15 @@ export async function getOrderDetail(orderNumber: string, config: TiktokConfig):
  * @param {TiktokConfig} config - Tiktok API configuration.
  * @returns {Promise<any>} The response containing the list of order.
  */
-export async function getOrderList(before, config: TiktokConfig): Promise<any> {
+export async function getOrderList(before: number, params: {page_size: number;page_token?: string}, config: TiktokConfig): Promise<any> {
   const timestamp = Math.floor(Date.now() / 1000);
-  const commonParam = `${TiktokHelper.commonParameter2(config, timestamp)}&page_size=20`;
+  const commonParam = TiktokHelper.commonParameter3(config, {page_size: params.page_size, page_token: params.page_token, version: '202309'}, timestamp);
 
   const body = {
-    order_status: 'DELIVERED',
+    update_time_ge: before,
   };
 
-  const url = TiktokHelper.genURLWithSignature(TIKTOK_PATH_202309.ORDER_LIST, commonParam, config, body);
+  const url = TiktokHelper.genURLWithSignatureV2(TIKTOK_PATH_202309.ORDER_LIST, commonParam, config, body);
 
   const headers = TiktokHelper.getHeaders(config);
 

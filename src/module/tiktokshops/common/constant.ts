@@ -113,6 +113,7 @@ enum PATH_202309 {
   CREATE_PRODUCT = ' /product/202309/products',
   PACKAGE_TIME_SLOT = '/fulfillment/202309/packages/{package_id}/handover_time_slots',
   SHIP_PACKAGE = '/fulfillment/202309/packages/{package_id}/ship',
+  PACKAGE_DETAIL = '/fulfillment/202309/packages/{package_id}',
   ACTIVE_PRODUCT = '/product/202309/products/activate',
   DEACTIVE_PRODUCT = '/product/202309/products/deactivate',
   PACKAGE_SHIPPING_DOCUMENT = '/fulfillment/202309/packages/{package_id}/shipping_documents',

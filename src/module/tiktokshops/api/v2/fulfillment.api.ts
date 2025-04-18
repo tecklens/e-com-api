@@ -5,6 +5,27 @@ import { TiktokRequestShipPackage } from '../../dto/request/fulfillment.request'
 import { TiktokResponsePackageTimeSlot } from '../../dto/response/fulfillment.response';
 
 /**
+ * Detail Package
+ * @param packageId - Package ID.
+ * @param payload - Payload for shipping package.
+ * @param config - Tiktok API configuration.
+ * @returns Promise of shipping package.
+ */
+export async function detailPackage(packageId: string, config: TiktokConfig): Promise<any> {
+  if (!packageId) {
+    throw new Error('Invalid input: packageId are required');
+  }
+
+  const timestamp = Math.floor(Date.now() / 1000);
+  const commonParam = TiktokHelper.commonParameter2(config, timestamp);
+  const pathTimeSlot = TiktokHelper.replacePackageId(TIKTOK_PATH_202309.PACKAGE_DETAIL, packageId);
+
+  const url = TiktokHelper.genURLWithSignature(pathTimeSlot, commonParam, config);
+
+  return TiktokHelper.httpGet(url, config);
+}
+
+/**
  * Get Package Time Slots
  * @param packageId
  * @param config

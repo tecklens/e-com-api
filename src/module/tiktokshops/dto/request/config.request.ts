@@ -7,6 +7,7 @@ export interface Config {
   refreshTokenExipre?: number;
   refreshToken?: string;
   shopCipher?: string;
+  env?: string;
 }
 
 export interface ConfigList {

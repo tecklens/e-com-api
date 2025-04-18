@@ -44,7 +44,7 @@ function commonParameter3(config, params, timestamp) {
 function commonParameter2(config, timestamp) {
     const {appKey, shopId, shopCipher} = config;
     const commonParam =
-        '?app_key=' + appKey + '&sign=' + '' + '&timestamp=' + timestamp + '&shop_id=' + shopId + '&shop_cipher=' + shopCipher;
+        '?app_key=' + appKey + '&sign=' + '' + '&timestamp=' + timestamp + '&shop_id=' + shopId + '&shop_cipher=' + shopCipher + '&version=202309';
 
     return commonParam;
 }
@@ -88,6 +88,7 @@ function genURLWithSignature(path, commonParam, config, body?) {
     const params = parseParamsURL(url);
     const signature2 = signRequest(params, path, config, body);
     url.searchParams.set('sign', signature2);
+    console.log(url.toString());
     return url.toString();
 }
 
