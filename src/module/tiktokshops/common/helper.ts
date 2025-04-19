@@ -88,7 +88,6 @@ function genURLWithSignature(path, commonParam, config, body?) {
     const params = parseParamsURL(url);
     const signature2 = signRequest(params, path, config, body);
     url.searchParams.set('sign', signature2);
-    console.log(url.toString());
     return url.toString();
 }
 
@@ -97,7 +96,6 @@ function genURLWithSignatureV2(path, commonParam2: {sortedParams: string,paramSt
     const params = parseParamsURL(url);
     const signature2 = signRequest(params, path, config, body);
     url.searchParams.set('sign', signature2);
-    console.log(url.toString());
     return url.toString();
 }
 
