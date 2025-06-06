@@ -55,4 +55,5 @@ export {
   WebhookAddressUpdate as TiktokWebhookAddressUpdate,
   WebhookCancellation as TiktokWebhookCancellation,
   WebhookUpcomingAuthExpire as TiktokWebhookUpcomingAuthExpire,
+  WebhookBase as TiktokWebhookBase,
 };
