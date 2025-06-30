@@ -159,7 +159,9 @@ export async function getProductDetail(productId: string, config: TiktokConfig):
 
 /**
  *
+ * @param params
  * @param config - Tiktok API configuration.
+ * @param body
  * @returns {Promise<any>}
  */
 export async function getListProduct(params: {page_size: number;page_token?: string}, config: TiktokConfig, body?: any): Promise<TiktokResponseProductSearchData> {

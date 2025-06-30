@@ -41,8 +41,8 @@ export class TiktokModule {
     return await getProductDetail(productId, this.config);
   }
 
-  async getListProduct({params}: {params: {page_size: number;page_token?: string}}): Promise<any> {
-    return await getListProduct(params, this.config);
+  async getListProduct({params}: {params: {page_size: number;page_token?: string}}, body?: any): Promise<any> {
+    return await getListProduct(params, this.config, body);
   }
 
   async getAuthorizedShop(): Promise<TiktokResponseAuthorized> {
