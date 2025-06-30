@@ -162,11 +162,11 @@ export async function getProductDetail(productId: string, config: TiktokConfig):
  * @param config - Tiktok API configuration.
  * @returns {Promise<any>}
  */
-export async function getListProduct(params: {page_size: number;page_token?: string}, config: TiktokConfig): Promise<TiktokResponseProductSearchData> {
+export async function getListProduct(params: {page_size: number;page_token?: string}, config: TiktokConfig, body?: any): Promise<TiktokResponseProductSearchData> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter3(config, {page_size: params.page_size, page_token: params.page_token, version: '202309'}, timestamp);
-  const body = {status: 'ALL'}
-  const url = TiktokHelper.genURLWithSignatureV2(TIKTOK_PATH_202309.PRODUCT_LIST, commonParam, config, body);
+  const finalBody = {status: 'ALL', ...body}
+  const url = TiktokHelper.genURLWithSignatureV2(TIKTOK_PATH_202309.PRODUCT_LIST, commonParam, config, finalBody);
 
   const headers = TiktokHelper.getHeaders(config);
   return TiktokHelper.httpPost(url, body, headers);
