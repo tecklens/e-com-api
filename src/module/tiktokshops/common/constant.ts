@@ -117,7 +117,7 @@ enum PATH_202309 {
   ACTIVE_PRODUCT = '/product/202309/products/activate',
   DEACTIVE_PRODUCT = '/product/202309/products/deactivate',
   PACKAGE_SHIPPING_DOCUMENT = '/fulfillment/202309/packages/{package_id}/shipping_documents',
-
+  SEARCH_RETURN = '/return_refund/202309/returns/search',
 }
 
 enum PATH_202502 {

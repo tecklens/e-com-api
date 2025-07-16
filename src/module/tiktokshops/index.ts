@@ -1,3 +1,5 @@
+import { searchReturns } from './api/v2/return-refund.api';
+
 export * from './api/v2/authorization.api'
 import { getOrderDetail, getOrderList } from './api/v2/order.api';
 import { TiktokConfig } from './dto/request/config.request';
@@ -87,5 +89,9 @@ export class TiktokModule {
 
   async fetchTokenWithAuthCode(authCode: string): Promise<TiktokResponseAccessToken> {
     return await fetchTokenWithTiktokAuthCode(authCode, this.config);
+  }
+
+  async searchReturnRefund(returnIds: string[], from: number, params: {page_size: number;page_token?: string}): Promise<any> {
+    return await searchReturns(returnIds, from, params, this.config);
   }
 }
