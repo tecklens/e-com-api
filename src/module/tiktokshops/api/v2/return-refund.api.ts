@@ -14,6 +14,7 @@ export async function searchReturns(returnIds: string[], before: number, params:
   const commonParam = TiktokHelper.commonParameter3(config, {page_size: params.page_size, page_token: params.page_token, version: '202309'}, timestamp);
 
   const body = {
+    return_ids: returnIds,
     update_time_ge: before,
   };
 
