@@ -1,7 +1,7 @@
 import { TiktokConfig } from '../../dto/request/config.request';
 import { TIKTOK_PATH_202309 } from '../../common/constant';
 import * as TiktokHelper from '../../common/helper';
-import { TiktokResponseOrderDetail } from '../../dto/response/order.response';
+import { ResponseReturnOrdersDataDto } from '../../dto/response';
 
 /**
  *
@@ -9,7 +9,7 @@ import { TiktokResponseOrderDetail } from '../../dto/response/order.response';
  * @param config Tiktok API configuration.
  * @returns The response containing the order detail.
  */
-export async function searchReturns(returnIds: string[], before: number, params: {page_size: number;page_token?: string}, config: TiktokConfig): Promise<TiktokResponseOrderDetail> {
+export async function searchReturns(returnIds: string[], before: number, params: {page_size: number;page_token?: string}, config: TiktokConfig): Promise<ResponseReturnOrdersDataDto> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter3(config, {page_size: params.page_size, page_token: params.page_token, version: '202309'}, timestamp);
 

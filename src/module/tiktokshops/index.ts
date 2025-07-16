@@ -1,6 +1,7 @@
 import { searchReturns } from './api/v2/return-refund.api';
 
 export * from './api/v2/authorization.api'
+export * from './dto/response'
 import { getOrderDetail, getOrderList } from './api/v2/order.api';
 import { TiktokConfig } from './dto/request/config.request';
 import { fetchTokenWithTiktokAuthCode, getAuthorizedShop, refreshToken } from './api/v2/authorization.api';
@@ -13,6 +14,7 @@ import { TiktokResponseAccessToken, TiktokResponseAuthorized, TiktokResponseRefr
 import { TiktokResponsePackageTimeSlot } from './dto/response/fulfillment.response';
 import { TiktokResponseOrderDetail } from './dto/response/order.response';
 import { TiktokRequestCreateProduct } from './dto/request/product.request';
+import { ResponseReturnOrdersDataDto, ReturnOrdersDataDto } from './dto/response';
 
 export class TiktokModule {
   private config: TiktokConfig;
@@ -91,7 +93,7 @@ export class TiktokModule {
     return await fetchTokenWithTiktokAuthCode(authCode, this.config);
   }
 
-  async searchReturnRefund(returnIds: string[], from: number, params: {page_size: number;page_token?: string}): Promise<any> {
+  async searchReturnRefund(returnIds: string[], from: number, params: {page_size: number;page_token?: string}): Promise<ResponseReturnOrdersDataDto> {
     return await searchReturns(returnIds, from, params, this.config);
   }
 }
