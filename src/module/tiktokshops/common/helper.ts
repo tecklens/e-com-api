@@ -71,7 +71,7 @@ function signRequest(params: Record<string, string>, path: string, config: Recor
     signstring = signstring + (!body ? appSecret : JSON.stringify(body) + appSecret);
 
     const hmac = crypto.createHmac("sha256", appSecret);
-    hmac.update(signstring, 'utf-8');
+    hmac.update(signstring);
     return hmac.digest("hex");
 }
 
