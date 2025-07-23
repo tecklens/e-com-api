@@ -18,7 +18,7 @@ export async function searchReturns(returnIds: string[], before: number, params:
     update_time_ge: before,
   };
 
-  const url = TiktokHelper.genURLWithSignatureV2(TIKTOK_PATH_202309.ORDER_LIST, commonParam, config, body);
+  const url = TiktokHelper.genURLWithSignatureV2(TIKTOK_PATH_202309.SEARCH_RETURN, commonParam, config, body);
 
   const headers = TiktokHelper.getHeaders(config);
 
