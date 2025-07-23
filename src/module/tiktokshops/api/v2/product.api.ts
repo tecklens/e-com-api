@@ -175,7 +175,7 @@ export async function getListProduct(params: {page_size: number;page_token?: str
 
   const headers = TiktokHelper.getHeaders(config);
 
-  return TiktokHelper.httpPost(url, body, headers);
+  return TiktokHelper.httpPost(url, finalBody, headers);
 }
 
 /**
