@@ -1,5 +1,5 @@
 import { NhanhConfig } from '../dto';
-import { NHANH_END_POINT, NHANH_PATH } from '../common/constant';
+import { NHANH_END_POINT, NHANH_PATH, NHANH_V3_END_POINT } from '../common/constant';
 import * as NhanhHelper from '../common/helper'
 import { NhanhResponseAccessToken } from '../dto/response/config.response';
 
@@ -29,14 +29,15 @@ function fetchTokenWithTiktokAuthCode(authCode: string, config: NhanhConfig): Pr
   const { appId, returnLink, appSecret } = config;
   const queryParams = new URLSearchParams({
     appId: appId,
-    version: authCode,
-    returnLink,
+    businessId: config.businessId ?? '',
+  });
+  const body = {
     accessCode: authCode,
     secretKey: appSecret,
-  });
-  const url = `${NHANH_END_POINT}${NHANH_PATH.AUTHORIZED_SHOP}?${queryParams}`;
+  }
+  const url = `${NHANH_V3_END_POINT}${NHANH_PATH.AUTHORIZED_SHOP}?${queryParams}`;
 
-  return NhanhHelper.httpGet(url, config);
+  return NhanhHelper.httpPost(url, body, config);
 }
 
 export {

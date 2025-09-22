@@ -1,6 +1,6 @@
 {
-  "name": "e-com-api",
-  "version": "4.0.1",
+  "name": "ecom-api",
+  "version": "4.0.2",
   "description": "Shopee Tiktokshops Lazada OPEN API",
   "files": [
     "dist"
