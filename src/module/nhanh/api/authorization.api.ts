@@ -36,8 +36,9 @@ function fetchTokenWithTiktokAuthCode(authCode: string, config: NhanhConfig): Pr
     secretKey: appSecret,
   }
   const url = `${NHANH_V3_END_POINT}${NHANH_PATH.AUTHORIZED_SHOP}?${queryParams}`;
-
-  return NhanhHelper.httpPost(url, body, config);
+  console.log(url, body);
+  const headers = NhanhHelper.getHeaders(config);
+  return NhanhHelper.httpPost(url, body, headers);
 }
 
 export {
