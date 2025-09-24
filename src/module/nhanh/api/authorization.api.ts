@@ -25,7 +25,7 @@ function generateAuthLink(config: NhanhConfig) {
  * @param config
  * @returns
  */
-function fetchTokenWithTiktokAuthCode(authCode: string, config: NhanhConfig): Promise<NhanhResponseAccessToken> {
+function fetchTokenWithNhanhAuthCode(authCode: string, config: NhanhConfig): Promise<NhanhResponseAccessToken> {
   const { appId, returnLink, appSecret } = config;
   const queryParams = new URLSearchParams({
     appId: appId,
@@ -36,12 +36,11 @@ function fetchTokenWithTiktokAuthCode(authCode: string, config: NhanhConfig): Pr
     secretKey: appSecret,
   }
   const url = `${NHANH_V3_END_POINT}${NHANH_PATH.AUTHORIZED_SHOP}?${queryParams}`;
-  console.log(url, body);
   const headers = NhanhHelper.getHeaders(config);
   return NhanhHelper.httpPost(url, body, headers);
 }
 
 export {
-  fetchTokenWithTiktokAuthCode as fetchTokenWithTiktokAuthCodeNhanh,
+  fetchTokenWithNhanhAuthCode as fetchTokenWithAuthCodeNhanh,
   generateAuthLink as generateAuthLinkNhanh,
 }

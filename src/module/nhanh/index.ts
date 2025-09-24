@@ -21,7 +21,7 @@ export class NhanhModule {
   }
 
   async fetchTokenWithAuthCode(authCode: string): Promise<NhanhResponseAccessToken> {
-    return await AuthorizationApi.fetchTokenWithTiktokAuthCodeNhanh(authCode, this.config);
+    return await AuthorizationApi.fetchTokenWithAuthCodeNhanh(authCode, this.config);
   }
 
   async generateAuthLink(): Promise<any> {
