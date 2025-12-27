@@ -59,8 +59,9 @@ const ALGORITHM = 'sha256';
 const DIGEST = 'hex';
 
 const MAX_PAGE_SIZE = 100;
-const END_POINT = 'https://partner.shopeemobile.com';
+// const END_POINT = 'https://partner.shopeemobile.com';
 const END_POINT_SANDBOX = 'https://partner.test-stable.shopeemobile.com';
+const END_POINT = 'https://openplatform.sandbox.test-stable.shopee.sg';
 
 enum PATH {
   ADD_ITEM = '/api/v2/product/add_item',
@@ -95,7 +96,7 @@ enum PATH {
   GET_COMMENTS = '/api/v2/product/get_comment',
   GET_CATEGORY = '/api/v2/product/get_category',
   GET_BRAND_LIST = '/api/v2/product/get_brand_list',
-  GET_ATTRIBUTES = '/api/v2/product/get_attributes',
+  GET_ATTRIBUTES = '/api/v2/product/get_attribute_tree',
 }
 
 export {
