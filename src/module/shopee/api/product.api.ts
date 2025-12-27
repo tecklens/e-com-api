@@ -53,6 +53,70 @@ export async function getProductItemList(config: ShopeeConfig): Promise<any> {
 }
 
 /**
+ * Lấy danh sách model (SKU) của 1 sản phẩm Shopee
+ * @param config ShopeeConfig
+ * @param itemId number | string  (bắt buộc)
+ * @returns model_list: SKU + stock + price
+ */
+export async function getModelList(
+  config: ShopeeConfig,
+  itemId: number | string,
+): Promise<any> {
+  const timestamp = ShopeeHelper.getTimestampNow();
+
+  // sign phải dùng đúng path GET_MODEL_LIST
+  const signature = ShopeeHelper.signRequest(
+    SHOPEE_PATH.GET_MODEL_LIST,
+    config,
+    timestamp,
+  );
+
+  try {
+    const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+
+    const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_MODEL_LIST}${commonParam}&item_id=${itemId}`;
+
+    const { data } = await axios.get(url);
+
+    return data.response.model;
+  } catch (error: any) {
+    throw new Error(`Failed to fetch model list: ${error?.message}`);
+  }
+}
+
+/**
+ * Lấy danh sách model (SKU) của 1 sản phẩm Shopee
+ * @param config ShopeeConfig
+ * @param itemId number | string  (bắt buộc)
+ * @returns model_list: SKU + stock + price
+ */
+export async function getTierVariation(
+  config: ShopeeConfig,
+  itemId: number | string,
+): Promise<any> {
+  const timestamp = ShopeeHelper.getTimestampNow();
+
+  // sign phải dùng đúng path GET_MODEL_LIST
+  const signature = ShopeeHelper.signRequest(
+    SHOPEE_PATH.GET_MODEL_LIST,
+    config,
+    timestamp,
+  );
+
+  try {
+    const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+
+    const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_MODEL_LIST}${commonParam}&item_id=${itemId}`;
+
+    const { data } = await axios.get(url);
+
+    return data.response.tier_variation;
+  } catch (error: any) {
+    throw new Error(`Failed to fetch model list: ${error?.message}`);
+  }
+}
+
+/**
  *
  * @param itemIds - Product IDs.
  * @param config - Shopee API configuration.
@@ -266,7 +330,7 @@ export async function getCategory(config: ShopeeConfig): Promise<ShopeeResponseG
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_CATEGORY, config, timestamp);
   const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
 
-  const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_CATEGORY}${commonParam}`;
+  const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_CATEGORY}${commonParam}&language=vi`;
   return ShopeeHelper.httpGet(url, config);
 }
 
@@ -276,11 +340,13 @@ export async function getCategory(config: ShopeeConfig): Promise<ShopeeResponseG
  * @param config - Shopee API configuration.
  * @returns {Promise<ShopeeResponseGetCategories>}
  */
-export async function getAttributes(categoryId: number, config: ShopeeConfig): Promise<ShopeeResponseGetAttributes> {
+export async function getAttributes(categoryId: number | number[], config: ShopeeConfig): Promise<ShopeeResponseGetAttributes> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_ATTRIBUTES, config, timestamp);
+  const categoryIdList = Array.isArray(categoryId) ? categoryId : [categoryId];
   const additionalParams = {
-    category_id: categoryId,
+    category_id_list: categoryIdList.join(','), // nối bằng dấu phẩy
+    language: 'vi',
   };
 
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
