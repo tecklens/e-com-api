@@ -8,15 +8,35 @@ function commonParameter(config: ShopeeConfig, signature: string, timestamp: num
   return commonParam;
 }
 
-function signRequest(path: string, config: ShopeeConfig, timestamp) {
-  const { partnerId, accessToken, shopId, partnerKey } = config;
-  let params = [partnerId, path, timestamp.toString(), accessToken, shopId];
-  params = params.filter(function (item) {
-    return item !== null;
-  });
-  const baseString = params.reduce((prev, curr) => (prev += curr), '');
+// function signRequest(path: string, config: ShopeeConfig, timestamp) {
+//   const { partnerId, accessToken, shopId, partnerKey } = config;
+//   let params = [partnerId, path, timestamp.toString(), accessToken, shopId];
+//   params = params.filter(function (item) {
+//     return item !== null;
+//   });
+//   const baseString = params.reduce((prev, curr) => (prev += curr), '');
 
-  return createHmac('sha256', partnerKey).update(baseString).digest('hex');
+//   return createHmac('sha256', partnerKey).update(baseString).digest('hex');
+// }
+
+function signRequestUrl(path: string, config: ShopeeConfig, timestamp: number) {
+  const { partnerId, partnerKey } = config;
+
+  const baseString = `${partnerId}${path}${timestamp}`;
+
+  return createHmac("sha256", partnerKey)
+    .update(baseString)
+    .digest("hex");
+}
+
+function signRequest(path: string, config: ShopeeConfig, timestamp: number) {
+  const { partnerId, partnerKey, accessToken, shopId } = config;
+
+  const baseString = `${partnerId}${path}${timestamp}${accessToken}${shopId}`;
+
+  return createHmac("sha256", partnerKey)
+    .update(baseString)
+    .digest("hex");
 }
 
 function getTimestampNow() {
@@ -138,6 +158,7 @@ export {
   buildCommonParameters,
   getTimestampMinutesAgo,
   signRequest,
+  signRequestUrl,
   getTimestampNow,
   commonParameter,
   optionalField,
