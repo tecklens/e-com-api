@@ -16,7 +16,7 @@ export async function generateAuthLink(redirectURL: string, config: ShopeeConfig
   const redirect = redirectURL;
   const timestamp = ShopeeHelper.getTimestampNow();
 
-  const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GENERATE_AUTH_LINK, config, timestamp);
+  const signature = ShopeeHelper.signRequestUrl(SHOPEE_PATH.GENERATE_AUTH_LINK, config, timestamp);
   const commonParam = `?partner_id=${partnerId}&redirect=${redirect}&timestamp=${timestamp}&sign=${signature}`;
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GENERATE_AUTH_LINK}${commonParam}`;
