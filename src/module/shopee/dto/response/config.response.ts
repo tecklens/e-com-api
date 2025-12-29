@@ -14,6 +14,13 @@ interface ResponseRefreshAccessToken extends ResponseGetAccessToken {
   partner_id: string;
 }
 
+interface ShopProfile {
+  shop_logo: string;
+  description: string;
+  shop_name: string;
+  invoice_issuer: string;
+}
+
 interface ResponseCommon<T> {
   request_id: string;
   error: string;
@@ -21,8 +28,11 @@ interface ResponseCommon<T> {
   response: T;
 }
 
+interface ResponseShopProfile extends ResponseCommon<ShopProfile> {}
+
 export {
   ResponseCommon as ShopeeResponseCommon,
   ResponseGetAccessToken as ShopeeResponseGetAccessToken,
   ResponseRefreshAccessToken as ShopeeResponseRefreshAccessToken,
+  ResponseShopProfile as ShopeeResponseShopProfile,
 };

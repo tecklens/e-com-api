@@ -97,6 +97,7 @@ enum PATH {
   GET_CATEGORY = '/api/v2/product/get_category',
   GET_BRAND_LIST = '/api/v2/product/get_brand_list',
   GET_ATTRIBUTES = '/api/v2/product/get_attribute_tree',
+  GET_PROFILE = '/api/v2/shop/get_profile',
 }
 
 export {

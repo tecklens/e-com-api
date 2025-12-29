@@ -2,7 +2,7 @@ import { SHOPEE_ALGORITHM, SHOPEE_DIGEST, SHOPEE_END_POINT, SHOPEE_PATH } from '
 import { ShopeeConfig, ShopeeRequestRefreshToken } from '../dto/request/config.request';
 import { createHmac } from 'crypto';
 import * as ShopeeHelper from '../common/helper';
-import { ShopeeResponseRefreshAccessToken } from '../dto/response/config.response';
+import { ShopeeResponseRefreshAccessToken, ShopeeResponseShopProfile } from '../dto/response/config.response';
 
 /**
  *
@@ -92,4 +92,13 @@ export function verifySignature(signature: string, config, payload: any): boolea
   const baseString = process.env.SHOPEE_WEBHOOK2 + '|' + payload.toString();
   const calAuth = createHmac(SHOPEE_ALGORITHM, config.partnerKey).update(baseString).digest(SHOPEE_DIGEST);
   return calAuth === signature;
+}
+
+export async function getShopProfile(config: ShopeeConfig): Promise<ShopeeResponseShopProfile> {
+  const timestamp = ShopeeHelper.getTimestampNow();
+  const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_PROFILE, config, timestamp);
+  const commonParam = `${ShopeeHelper.commonParameter(config, signature, timestamp)}`;
+
+  const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_PROFILE}${commonParam}`;
+  return ShopeeHelper.httpGet(url, config);
 }

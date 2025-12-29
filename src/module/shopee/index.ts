@@ -29,8 +29,8 @@ import {
   ShopeeResponseShipOrder,
   ShopeeResponseShippingParameter,
 } from './dto/response/logistic.reponse';
-import { fetchTokenWithAuthCode, fetchTokenWithRefreshToken } from './api/authorization.api';
-import { ShopeeResponseRefreshAccessToken } from './dto/response/config.response';
+import { fetchTokenWithAuthCode, fetchTokenWithRefreshToken, getShopProfile } from './api/authorization.api';
+import { ShopeeResponseRefreshAccessToken, ShopeeResponseShopProfile } from './dto/response/config.response';
 
 export class ShopeeModule {
   private readonly config: ShopeeConfig;
@@ -109,5 +109,9 @@ export class ShopeeModule {
 
   async refreshToken(): Promise<ShopeeResponseRefreshAccessToken> {
     return await fetchTokenWithRefreshToken(this.config);
+  }
+
+  async getProfile(): Promise<ShopeeResponseShopProfile> {
+    return await getShopProfile(this.config);
   }
 }
