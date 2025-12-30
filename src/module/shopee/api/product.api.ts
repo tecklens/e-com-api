@@ -78,7 +78,7 @@ export async function getModelList(
 
     const { data } = await axios.get(url);
 
-    return data.response.model;
+    return data.response?.model;
   } catch (error: any) {
     throw new Error(`Failed to fetch model list: ${error?.message}`);
   }
@@ -110,7 +110,7 @@ export async function getTierVariation(
 
     const { data } = await axios.get(url);
 
-    return data.response.tier_variation;
+    return data.response?.tier_variation;
   } catch (error: any) {
     throw new Error(`Failed to fetch model list: ${error?.message}`);
   }
