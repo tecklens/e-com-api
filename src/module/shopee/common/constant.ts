@@ -59,9 +59,9 @@ const ALGORITHM = 'sha256';
 const DIGEST = 'hex';
 
 const MAX_PAGE_SIZE = 100;
-// const END_POINT = 'https://partner.shopeemobile.com';
+const END_POINT = 'https://partner.shopeemobile.com';
 const END_POINT_SANDBOX = 'https://partner.test-stable.shopeemobile.com';
-const END_POINT = 'https://openplatform.sandbox.test-stable.shopee.sg';
+// const END_POINT = 'https://openplatform.sandbox.test-stable.shopee.sg';
 
 enum PATH {
   ADD_ITEM = '/api/v2/product/add_item',
