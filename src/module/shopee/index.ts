@@ -59,8 +59,8 @@ export class ShopeeModule {
     return await getOrderDetail(orderNumber, this.config);
   }
 
-  async getOrderDetails(orderNumbers: string[]): Promise<ShopeeResponseOrderDetail> {
-    return await getOrderDetails(orderNumbers, this.config);
+  async getOrderDetails(orderSns: string[]): Promise<ShopeeResponseOrderDetail> {
+    return await getOrderDetails(orderSns, this.config);
   }
 
   async getProductItemList(): Promise<any> {
