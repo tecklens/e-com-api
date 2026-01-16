@@ -1,7 +1,11 @@
 export * from './api/authorization.api'
 export * from './dto'
 import { ShopeeConfig } from './dto/request/config.request';
-import { getOrderDetail, getOrders } from './api/order.api';
+import { 
+  getOrderDetail, 
+  getOrders, 
+  getOrderDetails
+} from './api/order.api';
 import {
   getProductItemBaseInfo,
   getProductItemList,
@@ -53,6 +57,10 @@ export class ShopeeModule {
 
   async getOrderDetail(orderNumber: string): Promise<ShopeeResponseOrderDetail> {
     return await getOrderDetail(orderNumber, this.config);
+  }
+
+  async getOrderDetails(orderSns: string[]): Promise<ShopeeResponseOrderDetail> {
+    return await getOrderDetails(orderSns, this.config);
   }
 
   async getProductItemList(): Promise<any> {

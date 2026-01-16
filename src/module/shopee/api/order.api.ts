@@ -54,3 +54,41 @@ export async function getOrderDetail(orderNumber: string, config: ShopeeConfig):
 
   return ShopeeHelper.httpGet(url, config);
 }
+
+export async function getOrderDetails(
+  orderSns: string[],
+  config: ShopeeConfig,
+): Promise<any> {
+  if (!orderSns.length) {
+    throw new Error('orderSns is empty');
+  }
+
+  if (orderSns.length > 50) {
+    throw new Error('Shopee only allows max 50 order_sn per request');
+  }
+
+  const timestamp = ShopeeHelper.getTimestampNow();
+  const optionalField = ShopeeHelper.optionalField();
+  const signature = ShopeeHelper.signRequest(
+    SHOPEE_PATH.ORDER_DETAIL,
+    config,
+    timestamp,
+  );
+
+  const additionalParams = {
+    order_sn_list: orderSns.join(','),
+    response_optional_fields: optionalField.join(','),
+  };
+
+  const commonParam = ShopeeHelper.buildCommonParams(
+    config,
+    signature,
+    timestamp,
+    additionalParams,
+  );
+
+  const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ORDER_DETAIL}${commonParam}`;
+
+  return ShopeeHelper.httpGet(url, config);
+}
+
